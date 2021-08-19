@@ -21,7 +21,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
+    - uses: actions/setup-node@v2
+    - uses: cypress-io/github-action@v2.9.7
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
@@ -29,3 +30,4 @@ jobs:
         npm install
         npm run-script ionic-serve
         npm run-script cypress:run
+        
