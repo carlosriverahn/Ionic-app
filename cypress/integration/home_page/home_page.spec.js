@@ -9,6 +9,6 @@ describe('Psonrie home page loading', () => {
 
     //test error
     it('Home page opened',() => {
-        cy.contains('Ready to create two app?')
+        cy.contains('Ready to create one app?')
     });
 })
