@@ -23,6 +23,10 @@ jobs:
     - name: Use Node.js ${{ matrix.node-version }}
     - uses: actions/setup-node@v2
     - uses: cypress-io/github-action@v2.9.7
+    - name: Install @angular/cli
+      run: npm i -D -E @angular/cli
+    - name: Use coturiv/setup-ionic
+      uses: coturiv/setup-ionic@v1
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
