@@ -25,6 +25,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm install
-    - run: npm run-script ionic-serve
-    - run: npm run-script cypress:run
+    - run: |
+        npm install
+        npm run-script ionic-serve
+        npm run-script cypress:run
