@@ -14,6 +14,7 @@ jobs:
       uses: cypress-io/github-action@v2
       with:
           node-vesion: 14.x
-    - run: npm run build
-    - run: 'ionic serve'
+    - run: npm install
+    - run: ionic serve
+    - run: npm run-script cypress:run
     
