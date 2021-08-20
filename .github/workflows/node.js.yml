@@ -12,7 +12,7 @@ jobs:
       - name: Ionic
         uses: coturiv/setup-ionic@v1
       - run: |
-         ionic start
+         ionic serve
         
       - name: Cypress
         uses: cypress-io/github-action@v2
