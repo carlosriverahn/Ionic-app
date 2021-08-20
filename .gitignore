@@ -29,3 +29,5 @@ npm-debug.log*
 /platforms
 /plugins
 /www
+cypress/screenshots/home_page/home_page.spec.js/Psonrie home page loading -- Home page opened -- before each hook (failed).png
+cypress/videos/home_page/home_page.spec.js.mp4

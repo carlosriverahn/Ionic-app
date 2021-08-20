@@ -9,9 +9,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "ionic-serve": "ionic serve",
+    "ionic-start": "ionic serve",
     "cypress:run": "cypress run",
-    "all": "npm run ionic-serve && npm run cypress:run"
+    "all": "npm run build && npm run start && npm run cypress:run"
 
   },
   "private": true,
