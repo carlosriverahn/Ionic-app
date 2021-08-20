@@ -1,4 +1,4 @@
-name: example-chrome
+name: e2e tests
 on: [push]
 jobs:
   tests:
@@ -6,10 +6,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - run: |
-          npm ci
-          npm run all
-        
+
       - name: Ionic
         uses: coturiv/setup-ionic@v1
       - run: |
