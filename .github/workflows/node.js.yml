@@ -1,37 +1,64 @@
 # This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-name: Node.js CI
-
-on:
-  push:
-    branches: [ main ]
+name: "CI"
+on: # rebuild any PRs and main branch changes
   pull_request:
-    branches: [ main ]
+  push:
+    branches:
+      - master
 
 jobs:
-  build:
-
+  build: # make sure build/ci work properly
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [12.x, 14.x, 16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-    - uses: actions/setup-node@v2
-    - uses: cypress-io/github-action@v2.9.7
-    - name: Install @angular/cli
-      run: npm i -D -E @angular/cli
-    - name: Use coturiv/setup-ionic
-      uses: coturiv/setup-ionic@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
     - run: |
-        npm install
-        npm run-script ionic-serve
-        npm run-script cypress:run
+        npm ci
+        npm run all
+  test: # make sure the action works on a clean machine without building
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: cypress-io/github-action@v2
+      with:
+        distribution: 'adopt' # See 'Supported distributions' for available options
+        java-version: 8
+    - name: Use coturiv/setup-ionic
+      uses: ./
+    - name: Electron
+        with:
+          working-directory: examples/chrome
+          
+    - uses: actions/upload-artifact@v2
+        with:
+          name: screenshots-in-electron
+          path: examples/chrome/cypress/screenshots
+          
+          
+    - name: Run Ionic project tests e2e with Cypress
+      run: |
+        ionic start
+    
+    - run: npx image-size cypress/screenshots/**/*.png
+        working-directory: examples/chrome
+
+      - name: Chrome
+        uses: ./
+        with:
+          working-directory: examples/chrome
+          browser: chrome
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: screenshots-in-chrome
+          path: examples/chrome/cypress/screenshots
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: video-in-chrome
+          path: examples/chrome/cypress/videos
+
+      - run: npx image-size cypress/screenshots/**/*.png
+        working-directory: examples/chrome
         
+      
