@@ -9,7 +9,7 @@ jobs:
       - run: |
           npm ci
       - name: Use coturiv/setup-ionic
-        uses: ./
+        uses: coturiv/setup-ionic@v1
       - name: Run e2e tests
         run: |
           npm run all
