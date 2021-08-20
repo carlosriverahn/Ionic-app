@@ -30,7 +30,7 @@ jobs:
           working-directory: examples/chrome
           
     - uses: actions/upload-artifact@v2
-        with:
+      with:
           name: screenshots-in-electron
           path: examples/chrome/cypress/screenshots
           
@@ -40,25 +40,23 @@ jobs:
         ionic start
     
     - run: npx image-size cypress/screenshots/**/*.png
+      working-directory: examples/chrome
+
+    - name: Chrome
+      uses: ./
+      with:
         working-directory: examples/chrome
+        browser: chrome
 
-      - name: Chrome
-        uses: ./
-        with:
-          working-directory: examples/chrome
-          browser: chrome
+    - uses: actions/upload-artifact@v2
+      with:
+        name: screenshots-in-chrome
+        path: examples/chrome/cypress/screenshots
 
-      - uses: actions/upload-artifact@v2
-        with:
-          name: screenshots-in-chrome
-          path: examples/chrome/cypress/screenshots
+    - uses: actions/upload-artifact@v2
+      with:
+        name: video-in-chrome
+        path: examples/chrome/cypress/videos
 
-      - uses: actions/upload-artifact@v2
-        with:
-          name: video-in-chrome
-          path: examples/chrome/cypress/videos
-
-      - run: npx image-size cypress/screenshots/**/*.png
-        working-directory: examples/chrome
-        
-      
+    - run: npx image-size cypress/screenshots/**/*.png
+      working-directory: examples/chrome
