@@ -11,12 +11,5 @@ jobs:
           
       - name: Cypress
         uses: cypress-io/github-action@v2
-        with:
-          start: ionic serve
-          wait-on: http://localhost:8100
-
-      - name: Ionic instalation
-        uses: coturiv/setup-ionic@v1
       - run: |
-         ionic serve
-  
+         ionic serve  
