@@ -13,7 +13,7 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           build: npm run build
-          start: npm start
+          start: ionic serve
           wait-on: http://localhost:8100
 
       - name: Ionic instalation
