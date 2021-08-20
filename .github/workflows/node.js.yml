@@ -9,19 +9,14 @@ jobs:
       - run: |
           npm ci
 
-      - name: Ionic
+      - name: Ionic instalation
         uses: coturiv/setup-ionic@v1
+      - name: Cypress instalation
+        uses: cypress-io/github-action@v2
       - run: |
          ionic serve
-        
-      - name: Cypress
-        uses: cypress-io/github-action@v2
-        with:
-          build: npm run build
-          start: npm start
-          wait-on: http://localhost:8100
-        
-
+         npx cypress run
+         
       - name: Cypress info
         uses: ./
         with:
