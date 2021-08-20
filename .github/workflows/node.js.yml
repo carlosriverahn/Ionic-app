@@ -1,6 +1,6 @@
 # This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-name: "node.js.yml"
+name: End-to-end tests
 on: # rebuild any PRs and main branch changes
   pull_request:
   push:
@@ -15,6 +15,10 @@ jobs:
     - uses: cypress-io/github-action@v2
     - uses: coturiv/setup-ionic@v1
     
+    - name: Run Ionic project tests e2e with Cypress
+      run: |
+        ionic start
+    
     - name: Electron
       with:
           working-directory: examples/chrome
@@ -23,11 +27,6 @@ jobs:
       with:
           name: screenshots-in-electron
           path: examples/chrome/cypress/screenshots
-          
-          
-    - name: Run Ionic project tests e2e with Cypress
-      run: |
-        ionic start
     
     - run: npx image-size cypress/screenshots/**/*.png
       working-directory: examples/chrome
