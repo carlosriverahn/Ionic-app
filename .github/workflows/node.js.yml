@@ -8,8 +8,7 @@ jobs:
         uses: actions/checkout@v2
       - run: |
           npm ci
-      - name: Use coturiv/setup-ionic
-        uses: coturiv/setup-ionic@v1
-      - name: Run e2e tests
-        run: |
-          npm run all
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          start: npm run ionic-serve
