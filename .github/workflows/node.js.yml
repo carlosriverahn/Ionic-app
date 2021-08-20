@@ -8,5 +8,7 @@ jobs:
         uses: actions/checkout@v2
       - run: |
           npm ci
-          npm run all
-          
+      - name: Ionic
+        uses: coturiv/setup-ionic@v1
+      - run: |
+         npm run all
