@@ -1,6 +1,6 @@
 describe('home page loading', () => {
     beforeEach(() => {
-        cy.visit('http://localhost:4200')
+        cy.visit('http://localhost:8100')
       });
 
     it('Home page opened',() => {
